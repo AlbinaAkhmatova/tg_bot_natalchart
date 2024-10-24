@@ -1,6 +1,8 @@
-package tutorial;
+package org.example;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class Bot extends TelegramLongPollingBot {
 
@@ -15,6 +17,25 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     @Override
-    public void onUpdateReceived(Update update) {}
+    public void onUpdateReceived(Update update) {
+        var msg = update.getMessage();
+        var user = msg.getFrom();
+        String msgBot = new String("Hello, " + user.getFirstName()+"! I can calculate a natal chart based on your data, namely date of birth, time of birth. If you want to know more about each point, click \"more\". Click on what you want to know!");
+        if(msg.isCommand()){
+            if(msg.getText().equals("/start"))
+                sendText(user.getId(), msgBot);
+            return;
+        }
+    }
+    public void sendText(Long who, String what){
+        SendMessage sm = SendMessage.builder()
+                .chatId(who.toString())
+                .text(what).build();
+        try {
+            execute(sm);
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
