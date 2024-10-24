@@ -6,12 +6,12 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return null;
+        return "tg_natal_chart_bot";
     }
 
     @Override
     public String getBotToken() {
-        return null;
+        return "7068011221:AAFHJT-yq9Z8AauLr3PkHN14akpm14vGeHI";
     }
 
     @Override
