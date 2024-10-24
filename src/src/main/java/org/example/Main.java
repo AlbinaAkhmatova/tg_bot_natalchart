@@ -1,4 +1,9 @@
 package org.example;
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.generics.BotSession;
+
 
 public class Main {
     public static void main(String[] args) throws TelegramApiException {
