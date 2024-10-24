@@ -6,6 +6,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import javax.validation.constraints.Null;
 import java.util.List;
 
 public class Bot extends TelegramLongPollingBot {
@@ -34,6 +36,7 @@ public class Bot extends TelegramLongPollingBot {
         var msg = update.getMessage();
         var user = msg.getFrom();
         String msgBot = new String("Hello, " + user.getFirstName()+"! I can calculate a natal chart based on your data, namely date of birth, time of birth. If you want to know more about each point, click \"more\". Click on what you want to know!");
+
         if(msg.isCommand()){
             if(msg.getText().equals("/start")){
                 sendText(user.getId(), msgBot);
@@ -56,6 +59,7 @@ public class Bot extends TelegramLongPollingBot {
                     "\n" +
                     "If you are wondering how exactly your natal chart can help you, don't hesitate to ask! \uD83D\uDE0A✨");
             String callbackData = update.getCallbackQuery().getData();
+            System.out.println(callbackData);
             switch (callbackData) {
                 case "page1": {
                     break;
@@ -65,10 +69,12 @@ public class Bot extends TelegramLongPollingBot {
                     break;
                 }
                 case "page3":
-                    // Логика для отображения цвета ауры
                     break;
+
             }
         }
+
+
     }
     public void sendText(Long who, String what){
         SendMessage sm = SendMessage.builder()
